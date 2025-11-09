@@ -1,0 +1,43 @@
+server:
+  port: 8000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true #-> 주기적으로 eureka한테 정보 가져옴
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  application:
+    name: apigateway-service
+  cloud:
+    gateway:
+      server:
+        webflux:
+          default-filters:
+            - name: GlobalFilter
+              args:
+                baseMessage: Spring Cloud Gateway WebFlux Global Filter
+                preLogger: true
+                postLogger: true
+          routes:
+            - id: first-service
+              #uri: http://localhost:8081 -> eureka 안 사용할경우
+              uri: lb://MY-FIRST-SERVICE # -> eureka로 먼저 감,eureka에 등록된 경우
+              predicates:
+                - Path=/first-service/**
+              filters:
+                - CustomFilter
+            - id: second-service
+              #uri: http://localhost:8082 -> eureka 안 사용할경우
+              uri: lb://MY-SECOND-SERVICE
+              predicates:
+                - Path=/second-service/**
+              filters:
+                - name: CustomFilter
+                - name: LoggingFilter
+                  args:
+                    baseMessage: Hi, there.
+                    preLogger: true
+                    postLogger: true
