@@ -5,6 +5,22 @@ ext {
 }
 
 dependencies {
+    /*h2*/
+    runtimeOnly 'com.h2database:h2'
+
+    /*jpa*/
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    /*validation*/
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    /*modelMapper*/
+    implementation 'org.modelmapper:modelmapper:3.2.4'
+
+    /*API 문서 생성(Swagger)*/
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5'
+
+    /*eureka-client*/
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 }
 
