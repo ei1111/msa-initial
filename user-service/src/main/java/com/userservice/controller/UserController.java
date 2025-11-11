@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/user-service")
 public class UserController {
     private final Environment env;
     private final Greeting greeting;
@@ -43,10 +44,9 @@ public class UserController {
         return greeting.getMessage();
     }
 
-
     @PostMapping("/users")
     public ResponseEntity<ResponseUser> createUser(@RequestBody RequestUser user) {
         UserDto userDto = userService.createUser(user.toUserDto());
-        return ResponseEntity.status(HttpStatus.CREATED).body(userDto.toResponseUser() );
+        return ResponseEntity.status(HttpStatus.CREATED).body(userDto.toResponse());
     }
 }

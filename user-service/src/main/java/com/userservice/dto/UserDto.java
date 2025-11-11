@@ -20,16 +20,16 @@ public class UserDto {
 
     private String encryptedPwd;
 
-    public UserEntity toUserEntity() {
+    public UserEntity toEntity(final String encodePw) {
         return UserEntity.builder()
                 .email(this.email)
                 .name(this.name)
                 .userId(UUID.randomUUID().toString())
-                .encryptedPwd("encrypted_password")
+                .encryptedPwd(encodePw)
                 .build();
     }
 
-    public ResponseUser toResponseUser() {
+    public ResponseUser toResponse() {
         return ResponseUser.builder()
                 .email(this.email)
                 .name(this.name)

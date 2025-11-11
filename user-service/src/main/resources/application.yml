@@ -18,9 +18,14 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  security:
+    user:
+      name: user
+      password: $2a$10$kn3jSKRXmhrj16Aru7Fi4..VJjZaDmjG3.XwMA1IPoZXAXbrPzsuq
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    prefer-ip-address: false
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
